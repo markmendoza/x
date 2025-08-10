@@ -8,6 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/loader.min.js"></script>
     <script>
       window.require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs' }});
+      X.$.css('.description{ padding:40px; } .description .content{ width:100% !important; }.description .spacer{display:none;}',[0,1000]);
+            
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/editor/editor.main.js"></script>
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/editor/editor.main.min.css" rel="stylesheet"/>
@@ -19,11 +21,7 @@
       <main>
         class{
           construct(){
-            X.$.css('.description{ padding:40px; } .description .content{ width:100% !important; }.description .spacer{display:none;}',[0,1000]);
-            X.$.mediaQuery(0,1000, (isMobile)=>{
-              this.isMobile = isMobile;
-            });
-            this.loading = true;
+            
           }
         }
       </main>
@@ -31,7 +29,6 @@
     <div class="x-grid logo">
       <ul>
         <li><img src="images/logo.png"/></li>
-        <li data-if="!this.isMobile"></li>
       </ul>
     </div>
     
@@ -42,7 +39,7 @@
           <h1>
             X is a Javascript template system <br/>for building web user interfaces. 
              </h1>
-            <p>If you're building components, working with plugins or looking for a simple template system, X is exactly what you need.</p>
+            <p>If you're building components, working with plugins or looking for a simple template system, X is exactly what youre looking for.</p>
             <span class="license">X is released under the MIT License.</span>
            
         </li>
