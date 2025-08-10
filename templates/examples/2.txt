@@ -1,0 +1,20 @@
+<template default>
+  <main>
+    class{
+      test(){
+        
+      }
+
+      /* will run after the elements are appended in the DOM */
+      destruct(){
+        
+        console.log(this.$.prop.div1);
+        console.log(this.$.ref.div2);
+        console.log(this.$.el.div3);
+      }
+    }
+  </main>
+  <div data-prop="div1" data-bind-tap="this.test">Hello world</div>
+  <div data-ref="div2" data-bind-click="function(){ this.test(); }">Hello world</div>
+  <div data-el="div3" data-bind-mousedown="function(o,e){ console.log(o,e); }">Hello world</div>
+</template>

@@ -1,0 +1,20 @@
+<template default>
+  <main>
+    class{
+      construct(){
+        this.test = new test();
+        this.test.log();
+      }
+    }
+  </main>
+</template>
+
+<template namespace="test">
+  <main>
+    class{
+      log(){
+
+      }
+    }
+  </main>
+</template>

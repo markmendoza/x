@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <title>X is a Javascript template system for building web user interfaces</title>
+  <meta name="description" content="X javascript template system, web ui, web components, javascript plugins, javascript snippets">
+  <head>
+    <link rel="stylesheet" href="/x.css"/>
+    <script src="/x.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/loader.min.js"></script>
+    <script>
+      window.require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs' }});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/editor/editor.main.js"></script>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/editor/editor.main.min.css" rel="stylesheet"/>
+  
+  </head>
+  <body>
+    <template default>
+      <require namespace="App">/templates/app.tpl</require>
+      <main>
+        class{
+          construct(){
+            X.$.css('.description{ padding:40px; } .description .content{ width:100% !important; }.description .spacer{display:none;}',[0,1000]);
+            X.$.mediaQuery(0,1000, (isMobile)=>{
+              this.isMobile = isMobile;
+            });
+            this.loading = true;
+          }
+        }
+      </main>
+    </template>
+    <div class="x-grid logo">
+      <ul>
+        <li><img src="/images/logo.png"/></li>
+        <li data-if="!this.isMobile"></li>
+      </ul>
+    </div>
+    
+    <div class="x-grid description"> 
+      <ul>
+        <li class="spacer"></li>
+        <li class="content x-t-c" style="width:1000px;">                
+          <h1>
+            X is a Javascript template system <br/>for building web user interfaces. 
+             </h1>
+            <p>If you're building components, working with plugins or looking for a simple template system, X is exactly what you need.</p>
+            <span class="license">X is released under the MIT License.</span>
+           
+        </li>
+        <li class="spacer"></li>
+      </ul>
+    </div>
+  </body>
+</html>

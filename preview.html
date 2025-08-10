@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/x.css"/>
+    <template default>
+      <main>
+        class{
+          construct(){           
+            X.$.error = (e)=>{ 
+              if(this.preview) this.preview.remove();
+              this.error = new error(e).appendTo("body", false);
+            };
+            
+            X.$.message["preview"] = (data) => { 
+              if(this.error){
+                this.error.remove();
+              }
+              X.template(data.template,"preview").ready((template) => {
+                if(this.preview){ this.preview.remove(); }
+                if(template){
+                  this.preview = new template().appendTo("body");
+                }
+              });
+              
+            };
+
+          }
+
+        }
+      </main>
+    </template>
+
+
+    <template namespace="error">
+      <div style="padding:10px;word-break: break-all;color:#7F0000;">
+        Error: {(this.$.options.error)}<br/><br/>Trace:<br/>
+        {if(/\n/.test(this.$.options.stack))}
+          this.$.options.stack.split(/\n/).join('<br/>')
+        {/if}
+      </div>
+    </template>
+    <script src="/x.js"></script>
+    <script>
+      X.$.message["ping"] = function(d){ 
+        window.parent.postMessage({target:d.id}, "*");
+      };
+    </script>
+  </head>
+  <body>
+      
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<template default>
+  <main>
+    class{
+      construct(){
+        X.$.mediaQuery(0,1000,(isMobile)=>{
+          this.isMobile = isMobile;
+          this.active = isMobile;
+        });
+      }
+    }
+  </main>
+
+  <style>
+    .active{
+      color:red;
+    }
+  </style>
+
+  <div data-if="this.isMobile">Show on mobile</div>
+  <div data-if="!this.isMobile|function(v){ return v && true; }">Show on desktop</div>
+
+  <div data-toggle="this.active|active">Red on mobile</div>
+  <div data-toggle="this.active|active|function(v){ return false; }">Black</div>
+</template>

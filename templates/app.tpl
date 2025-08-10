@@ -1,0 +1,279 @@
+
+<template namespace="vseditor">
+  <main>
+    class{
+      construct(){
+        this.cache = {};
+        this.await(function(i){ return typeof monaco; });
+        this.editor = monaco.editor.create(document.querySelector(arguments[0]),{
+              matchBrackets : true,
+              automaticLayout : true,
+              fontSize : this.fontSize || "14px",
+              lineHeight : "18px",
+              tabSize : 2,    
+              minimap : {
+                enabled : true
+              }
+            }
+          );
+
+        var timer1;
+        this.editor.onDidChangeModelContent(()=>{
+          clearTimeout(timer1);
+          timer1 = setTimeout(()=>{
+            window.App.doc.preview();
+          },1000);
+        });
+      }
+
+      edit(n){
+
+        if(this.cache[n]){
+          this.setValue(this.cache[n]);
+          return;
+        }
+
+        fetch('/templates/examples/'+n+'.txt')
+          .then(function(r){ return r.text(); })
+          .then((d)=>{
+            this.cache[n] = d;
+            this.setValue(d);
+          });
+      }
+
+      get(){
+        return this.editor;
+      }
+
+      getValue(){
+        return this.editor.getModel().getValue();
+      }
+
+      setValue(v){
+        this.editor.getModel().setValue(v);
+      }
+    }
+  </main> 
+</template>
+
+<template namespace="doc">
+  <main>
+    class{
+      construct(){
+        X.$.message[this.$.iid] = ()=>{
+          this.done = true; 
+        };
+      }
+      message(){
+        this.frame.contentWindow.postMessage({
+          target : "preview",
+          template : window.App.editor.getValue()
+        }, '*'); 
+      }
+
+      preview(){
+        if(!this.done){
+          var timer = setInterval(()=>{ 
+            this.frame.contentWindow.postMessage({target : 'ping', id : this.$.iid }, '*');
+            if(this.done){
+              clearInterval(timer); 
+              this.message();
+            }
+          },250);
+        }else{
+          this.message();
+        }
+      }
+    }
+  </main>
+  <div class="doc">
+    <h3>Getting started</h3>
+    <div>Add the script inside the head or body tag and youre done. No build tools or configurations required.</div>
+    <pre>
+      <code>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <script src="https://markmendoza.github.io/x/x.js"></script>
+    </head>
+    <body></body>
+  </html>
+      </code>
+    </pre>
+
+    <h3>Main Layout</h3>
+    <pre>
+     <code>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <script src="https://markmendoza.github.io/x/x.js"></script>
+    </head>
+    <body>
+      <template default>
+        <main>
+          class{
+            construct(){
+
+            }
+          }
+        </main>
+        <div>Nav</div>
+        <div>Menu etc</div>
+      </template>
+      
+      <div>Loading....</div>
+    </body>
+  </html>
+      </code>
+    </pre>
+    This template will automatically be instantiated and appended to its parent node ie body and will serve as your main layout.
+
+    <h3>Main Controller</h3>
+    <pre>
+     <code>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <script src="https://markmendoza.github.io/x/x.js"></script>
+    </head>
+    <body>
+      <template default>
+        <require namespace="anything">/path/to/controller.tpl</require>
+        <main>
+          class{
+            construct(){
+
+            }
+          }
+        </main>
+        <div>Nav</div>
+        <div>Menu etc</div>
+      </template>
+      
+      <div>Loading....</div>
+    </body>
+  </html>
+</code>
+</pre>
+  in path/to/controller.tpl
+<pre>
+<code>
+  window.App = await window.X.app();
+ </code>
+</pre>
+
+  This will assign the instance of the main template/layout to window.App. This will act as your main controller. This is only optional.
+ 
+ <br/><br/> If youre building plugins for example, you can load templates individually.
+
+  
+<pre>
+<code>
+  X.template("path/to/template.tpl").ready(function(template){
+    new template(options).appendTo(selector);
+  });
+ </code>
+</pre>
+
+<h3>Issues/Support</h3>
+Join our <a href="www.facebook.com/groups/x0x0x0/" class="x-link">Facebook Group</a> and ask us anything.
+
+  
+    
+  </div>
+  <h3 class="x-p-20">Try it now</h3>
+
+  <h3 class="x-p-20">Preview</h3>
+  <div style="border-top:1px solid #dbdbdb;height:200px">
+    <iframe data-bind-load="function(o){ this.frame = o; }" src="/preview.html" data-el="iframe" class="x-transition" style="border:0;width:100%;height:100%;"></iframe>
+      
+  </div>
+  <div data-prop="editor" style="border-top:1px solid #dbdbdb;border-bottom:1px solid #dbdbdb;height:200px"></div>
+  <h3 class="x-p-20">Examples</h3>
+</template>
+
+<template namespace="card">
+  <main>
+    class{
+      construct(){
+
+        var i=this.$.options.width;        
+        this.cls='x-c-'+i;
+        
+
+        X.$.containerQuery(0,i*2-1,"li."+this.cls+"{ width:100%; } ");
+        X.$.containerQuery(i*2,i*3-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*1+"px) / 2); } li."+this.cls+"-2-4{ width:100% !important; }");
+        X.$.containerQuery(i*3,i*4-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*2+"px) / 3); } li."+this.cls+"-3-6{ width:100% !important; }");
+        X.$.containerQuery(i*4,i*5-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*3+"px) / 4); } li."+this.cls+"-4-8{ width:100% !important; }");
+        X.$.containerQuery(i*5,i*6-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*4+"px) / 5); } li."+this.cls+"-5-10{ width:100% !important; }");
+        X.$.containerQuery(i*6,false,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*5+"px) / 6); } li."+this.cls+"-6-12{ width:100% !important;}"); 
+              
+      }
+
+      destruct(){
+        var e=1,t;
+        if(this.last) X.$.query(this.last).show();
+        X.$.query(this.$.prop.card+" .x-card-gutter").each((t) => {
+          var i=["x-card-gutter"];
+          if(e%2==0){i.push(this.cls+"-2-4");}
+          if(e%3==0){i.push(this.cls+"-3-6");}
+          if(e%4==0){i.push(this.cls+"-4-8");}
+          if(e%5==0){i.push(this.cls+"-5-10");}
+          if(e%6==0){i.push(this.cls+"-6-12");}
+          
+          t.className=i.join(" ");e++;
+          
+          this.last=t;
+          
+        });
+          
+        X.$.query(this.last).hide();
+      }
+
+    }
+    
+  </main>
+  <style>
+    .x-card{ padding:0; margin:0; width:100%;list-style:none; } 
+    .x-card > li{ list-style-type:none;float:left; margin:0; }
+    .x-card-list{ cursor:pointer; }
+  </style>
+  <div class="x-p-20">
+    <ul data-prop="card" class="x-card" style="container-type:inline-size">
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(1); }">Hello world</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(2); }">Accessing elements and Events</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(3); }">Observer</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(4); }">Show/hide elements and toggle classname</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(5); }">Conditional statements and for loop</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(6); }">Requiring js/css/template files</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(7); }">Prototypes/Methods</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(8); }">Await/ready</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+      
+    </ul>
+  </div>
+</template>
+
+
+
+window.App = await window.X.app();
+
+window.App.doc = new doc().appendTo("body");
+window.App.editor = new vseditor(window.App.doc.$.prop.editor);
+
+new card({width:300,gutter:20}).appendTo("body");

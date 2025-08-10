@@ -1,0 +1,141 @@
+
+*{    
+  font-size:inherit;
+  -webkit-box-sizing:border-box;
+  -mox-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Roboto, Arial;
+  font-size:1em;
+  height:100vh;
+  width:100%;
+  padding:0;
+  margin:0;
+  color:#2C2C32;
+}
+
+
+* {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -mox-user-select: -mox-none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+p,input,code{
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -mox-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+
+
+div.x-grid{ display:table;table-layout:fixed;width:100%; } 
+div.x-grid > ul{ display:table-row; border-spacing:0px;padding:0;margin:0;list-style:none;  } 
+div.x-grid > ul > li{ width:auto;display:table-cell;list-style-type:none;vertical-align:top; }
+
+div.x-grid.x-t-c > ul > li{ vertical-align:middle;text-align:center; }
+div.x-grid.x-v-m > ul > li{ vertical-align:middle; }
+div.x-grid > ul > li.x-v-m{ vertical-align:middle; }
+div.x-grid > ul > li.x-v-b{ vertical-align:bottom; }
+
+.x-clip{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.x-wrap{ word-wrap: break-word; }
+.x-o-y{ overflow-y:auto; }
+.x-c-p{ cursor:pointer; }
+.x-v-h{ height:100vh; }
+.x-t-c{ text-align:center; }
+.x-t-r{ text-align:right; }
+.x-t-l{ text-align:left; }
+.x-transition{ transition:all 0.27s ease }
+
+.x-hidden{visibility:hidden;}
+.x-visible{visibility:visible;}
+.x-hide{ display:none !important;}
+
+.x-show{
+  -webkit-animation: show .3s ease both;
+  animation: show .3s ease both;
+}
+
+@-webkit-keyframes show {
+  from { -webkit-transform: scale(0.8); }
+}
+@keyframes show {
+  from { transform: scale(0.8); }
+}
+
+.logo{
+  background:#2C2C32;
+  height:50px;
+}
+
+.logo img{
+  height:50px;
+}
+
+.description{
+  background:#dbdbdb;
+  
+}
+
+.description h1{
+  font-size:2.7em;
+  font-weight:normal; 
+  padding:20px 0px; 
+  margin-top:20px;
+  margin-bottom: 0px;
+}
+
+.description p{
+  font-size:1.3em;
+  font-weight:normal;
+  margin:0;
+}
+
+h3{
+  margin-top:20px;
+  font-size:1.4em;
+  font-weight:normal;
+}
+
+.license{
+  font-size:17px;
+  font-weight:normal;
+  padding:20px 10px;
+  margin-top:20px;
+  display:inline-block;
+}
+
+.try{
+  background:#dbdbdb;
+  font-size:1.3em;
+  padding:20px;
+}
+
+.editor{
+  height:350px;
+}
+
+.x-p-20{
+  padding:20px;
+}
+code{
+    padding:10px;
+background:#efefef;
+    display:block;
+    overflow:auto;
+  }
+
+.doc{
+  padding:20px;
+}
+
+.examples li{
+  text-decoration: underline;
+  cursor: pointer;
+}

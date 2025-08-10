@@ -1,0 +1,29 @@
+<template default>
+  <main>
+    class{
+      construct(){
+
+        /* object */
+        this.watch(window.test, {
+          name : function(v){
+            this.test = v;
+          }
+        });
+
+        /* local property */
+        this.onChange({
+          test : function(v){
+            this.dt = Date.now();
+          }
+        });
+      }
+    }
+  </main>
+  <div>Hello world {{this.test}}</div>
+  <div>{{this.dt}}</div>
+  <div>Change name: <input type="text" data-bind-keyup="function(o){ window.test.name = o.value;  }"/></div>
+</template>
+
+window.test = {
+  name : 'Mark'
+};
