@@ -177,7 +177,7 @@
 </pre>
 
 <h3>Issues/Support</h3>
-Join our <a href="www.facebook.com/groups/x0x0x0/" class="x-link">Facebook Group</a> and ask us anything.
+Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebook Group</a> and ask us anything.
 
   
     
