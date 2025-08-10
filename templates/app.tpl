@@ -33,7 +33,7 @@
           return;
         }
 
-        fetch('/templates/examples/'+n+'.txt')
+        fetch('templates/examples/'+n+'.txt')
           .then(function(r){ return r.text(); })
           .then((d)=>{
             this.cache[n] = d;
