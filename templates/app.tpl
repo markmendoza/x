@@ -237,7 +237,8 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
   <style>
     .x-card{ padding:0; margin:0; width:100%;list-style:none; } 
     .x-card > li{ list-style-type:none;float:left; margin:0; }
-    .x-card-list{ cursor:pointer; }
+    .x-card-list{ padding:10px;text-decoration:underline;cursor:pointer; }
+    .x-card-list:active{ color:#fff; }
   </style>
   <div class="x-p-20">
     <ul data-prop="card" class="x-card" style="container-type:inline-size">
