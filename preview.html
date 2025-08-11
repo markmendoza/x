@@ -7,19 +7,12 @@
         class{
           construct(){           
             X.$.error = (e)=>{ 
-              if(this.preview) this.preview.remove();
-              this.error = new error(e).appendTo("body", false);
+              new error(e).appendTo("body", false);
             };
             
             X.$.message["preview"] = (data) => { 
-              if(this.error){
-                this.error.remove();
-              }
               X.template(data.template,"preview").ready((template) => {
-                if(this.preview){ this.preview.remove(); }
-                if(template){
-                  this.preview = new template().appendTo("body");
-                }
+                new template().appendTo("body",false);
               });
               
             };

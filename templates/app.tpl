@@ -13,7 +13,8 @@
               tabSize : 2,    
               minimap : {
                 enabled : true
-              }
+              },
+              language : "html"
             }
           );
 
@@ -27,7 +28,6 @@
       }
 
       edit(n){
-
         if(this.cache[n]){
           this.setValue(this.cache[n]);
           return;
@@ -183,13 +183,12 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
     
   </div>
   <h3 class="x-p-20">Try it now</h3>
-
-  <h3 class="x-p-20">Preview</h3>
-  <div style="border-top:1px solid #dbdbdb;height:200px">
+<div data-prop="editor" style="border-top:1px solid #dbdbdb;border-bottom:1px solid #dbdbdb;height:400px"></div>
+  
+  <div style="border-bottom:1px solid #dbdbdb;border-top:1px solid #dbdbdb;height:200px">
     <iframe data-bind-load="function(o){ this.frame = o; }" src="preview.html" data-el="iframe" class="x-transition" style="border:0;width:100%;height:100%;"></iframe>
       
   </div>
-  <div data-prop="editor" style="border-top:1px solid #dbdbdb;border-bottom:1px solid #dbdbdb;height:200px"></div>
   <h3 class="x-p-20">Examples</h3>
 </template>
 
