@@ -6,15 +6,21 @@
       <main>
         class{
           construct(){           
-            X.$.error = (e)=>{ 
-              new error(e).appendTo("body", false);
+            window.onerror = (e,s)=>{ 
+              new error({error:e,stack:s}).appendTo("body", false);
             };
             
             X.$.message["preview"] = (data) => { 
+              
               X.template(data.template,"preview").ready((template) => {
+                
                 new template().appendTo("body",false);
               });
               
+            };
+
+            X.$.message["ping"] = function(d){ 
+              window.parent.postMessage({target:d.id}, "*");
             };
 
           }
@@ -33,11 +39,6 @@
       </div>
     </template>
     <script src="x.js"></script>
-    <script>
-      X.$.message["ping"] = function(d){ 
-        window.parent.postMessage({target:d.id}, "*");
-      };
-    </script>
   </head>
   <body>
       

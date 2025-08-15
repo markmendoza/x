@@ -21,7 +21,7 @@
         var timer1;
         this.editor.onDidChangeModelContent(()=>{
           clearTimeout(timer1);
-          timer1 = setTimeout(()=>{
+          timer1 = setTimeout(()=>{ 
             window.App.doc.preview();
           },1000);
         });
@@ -263,6 +263,9 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
       <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
       
       <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(8); }">Await/ready</li>
+      <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+
+      <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.editor.edit(9); }">Lists</li>
       <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
       
     </ul>

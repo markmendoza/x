@@ -1,11 +1,14 @@
 <template default>
-  <require>/path/to/test.js</require>
-  <require>/path/to/test.css</require>
-  <require namespace="test">/path/to/test.tpl</require>
+  <require>path/to/test.js</require>
+  <require>path/to/test.css</require>
+  <require namespace="test">path/to/test.tpl</require>
   <main>
     class{
-      construct(){
-        this.test = new test();
+      destruct(){
+        this.ready(function(){
+          /* assets have loaded */
+          new test().appendTo('body');
+        });
       }
     }
   </main>
