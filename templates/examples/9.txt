@@ -1,0 +1,26 @@
+<template default>
+  <main>
+    class{
+      construct(){
+        this.data = await new Promise(function(resolve){
+          fetch("https://jsonplaceholder.typicode.com/users").then((res)=>{
+            return res.json();
+          }).then(function(d){
+            resolve(d);
+          });
+        });
+
+        this.list.set(this.data);
+        
+      }
+    }
+  </main>
+
+  <div data-for="this.list|list"></div>
+</template>
+
+<template namespace="list">
+  <div>
+    {(this.$.options.name)}<br/> {(this.$.options.email)}
+  </div>
+</template>

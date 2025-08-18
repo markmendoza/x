@@ -1,0 +1,20 @@
+/* This will be the default template */
+<template default>
+  <main>
+    class{
+      construct(){
+        this.data = {name:"test"};
+      }
+      destruct(){
+        new test(this.data).appendTo(this.$.prop.root);
+      }
+    }
+  </main>
+
+  <div data-prop="root"></div>
+</template>
+
+
+<template namespace="test">
+  <div>Hello {(this.$.options.name)} world</div>
+</template>

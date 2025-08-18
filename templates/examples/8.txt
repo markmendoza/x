@@ -1,0 +1,28 @@
+<template default>
+  <require>path/to/test.js</require>
+  <require>path/to/test.css</require>
+  <require namespace="test">path/to/test.tpl</require>
+  <main>
+    class{
+      construct(){
+        /* blocking, use when checking variables for example */
+        await this.await(function(){ return typeof window.X; });
+        this.ready(function(){
+          /* assets/templates have loaded */
+        });
+
+        /* blocking */
+        await new Promise((resolve,reject)=>{
+          /* fetch some data */
+          resolve();
+          
+        });
+      }
+
+      destruct(){
+        /* elements are available in the DOM */
+      }
+    }
+  </main>
+</template>
+

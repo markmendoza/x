@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <title>X is a Javascript template system for building JAM Stack applications.</title>
+  <meta name="description" content="X javascript template system, JAM Stack">
+  <head>
+    <link rel="stylesheet" href="x.css"/>
+    <script src="x.js"></script>
+    <script src="v/vs/loader.js"></script>
+    <script>
+      window.require.config({ paths: { 'vs': 'v/vs' }});
+            
+    </script>
+    <script src="v/vs/editor/editor.main.js"></script>
+    <link  href="v/vs/editor/editor.main.css" rel="stylesheet"/>
+  
+  </head>
+  <body>
+    <template default>
+      <main>
+        class{
+          construct(){
+            this.cache = {};
+            window.App = this;
+            X.$.message[this.$.iid] = ()=>{
+              this.done = true; 
+            };
+
+            X.$.css('.editor{position:relative;width:100%;}.content{ padding:20px; }',[0,1000]);
+          }
+
+          message(){
+            this.frame.contentWindow.postMessage({
+              target : "preview",
+              template : this.getValue()
+            }, '*'); 
+          }
+
+          preview(){
+            if(!this.done){
+              var timer = setInterval(()=>{ 
+                if(this.frame)this.frame.contentWindow.postMessage({target : 'ping', id : this.$.iid }, '*');
+                if(this.done){
+                  clearInterval(timer); 
+                  this.message();
+                }
+              },250);
+            }else{
+              this.message();
+            }
+          }
+
+              
+          edit(n){
+            if(this.cache[n]){
+              this.setValue(this.cache[n]);
+              return;
+            }
+
+            fetch('templates/examples/'+n+'.txt')
+              .then(function(r){ return r.text(); })
+              .then((d)=>{
+                this.cache[n] = d;
+                this.setValue(d);
+              });
+          }
+
+          get(){
+            return this.editor;
+          }
+
+          getValue(){
+            return this.editor.getModel().getValue();
+          }
+
+          setValue(v){
+            this.editor.getModel().setValue(v);
+          }
+          
+          destruct(){
+            await this.await(function(){ return typeof monaco; });
+            this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
+                matchBrackets : true,
+                automaticLayout : true,
+                lineHeight : "18px",
+                tabSize : 2
+              }
+            );
+
+            var timer1;
+            this.editor.onDidChangeModelContent(()=>{
+              clearTimeout(timer1);
+              timer1 = setTimeout(()=>{ 
+                this.preview();
+              },1000);
+            });
+
+          }
+        }
+      </main>
+    </template>
+    <div class="x-grid logo">
+      <ul>
+        <li><img src="images/logo.png"/></li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>X is a javascript template system for building JAM Stack applications.</h2>
+      X is released under MIT License.
+      <div data-prop="content"></div>
+      <h3>Issues/Support</h3>
+Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebook Group</a> and ask us anything.
+
+      <template default>
+        <main>
+          class{
+            destruct(){
+              new installation().appendTo(window.App.$.prop.content);
+              new card({width:300,gutter:20}).appendTo(window.App.$.prop.content);
+            }
+          }
+        </main>
+      </template>
+      <template namespace="installation">
+        <h5>Getting Started</h5>
+        <div>Add the script inside the head or body tag. Thats it. No build tools or configurations required.</div>
+        <pre>
+          <code>
+  <script src="https://markmendoza.github.io/x/x.js"></script>
+          </code>
+        </pre>
+
+        <div>
+          <h5>Try it now</h5>
+        </div>
+      </template>
+
+            
+      <template namespace="card">
+        <main>
+          class{
+            construct(){
+
+              var i=this.$.options.width;        
+              this.cls='x-c-'+i;
+              
+
+              X.$.containerQuery(0,i*2-1,"li."+this.cls+"{ width:100%; } ");
+              X.$.containerQuery(i*2,i*3-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*1+"px) / 2); } li."+this.cls+"-2-4{ width:100% !important; }");
+              X.$.containerQuery(i*3,i*4-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*2+"px) / 3); } li."+this.cls+"-3-6{ width:100% !important; }");
+              X.$.containerQuery(i*4,i*5-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*3+"px) / 4); } li."+this.cls+"-4-8{ width:100% !important; }");
+              X.$.containerQuery(i*5,i*6-1,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*4+"px) / 5); } li."+this.cls+"-5-10{ width:100% !important; }");
+              X.$.containerQuery(i*6,false,"li."+this.cls+"{ width:calc((100% - "+this.$.options.gutter*5+"px) / 6); } li."+this.cls+"-6-12{ width:100% !important;}"); 
+                    
+            }
+
+            destruct(){
+              var e=1,t;
+              if(this.last) X.$.query(this.last).show();
+              X.$.query(this.$.prop.card+" .x-card-gutter").each((t) => {
+                var i=["x-card-gutter"];
+                if(e%2==0){i.push(this.cls+"-2-4");}
+                if(e%3==0){i.push(this.cls+"-3-6");}
+                if(e%4==0){i.push(this.cls+"-4-8");}
+                if(e%5==0){i.push(this.cls+"-5-10");}
+                if(e%6==0){i.push(this.cls+"-6-12");}
+                
+                t.className=i.join(" ");e++;
+                
+                this.last=t;
+                
+              });
+                
+              X.$.query(this.last).hide();
+            }
+
+          }
+          
+        </main>
+        <style>
+          .x-card{ padding:0; margin:0; width:100%;list-style:none; } 
+          .x-card > li{ list-style-type:none;float:left; margin:0; }
+          .x-card-list{ padding:10px;text-decoration:underline;cursor:pointer; }
+          .x-card-list:active{ color:#fff; }
+        </style>
+        <div class="x-p-20">
+          <ul data-prop="card" class="x-card" style="container-type:inline-size">
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(1); }">Hello world</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(2); }">Accessing elements and Events</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(3); }">Observer</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(4); }">Show/hide elements and toggle classname</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(5); }">Conditional statements and for loop</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(6); }">Requiring js/css/template files</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(7); }">Prototypes/Methods</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(8); }">Await/ready</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+
+            <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(9); }">Lists</li>
+            <li class="x-card-gutter" style="width:20px;height:20px" >&nbsp;</li>
+            
+          </ul>
+        </div>
+      </template>
+
+    </div>
+    <div class="editor">
+      <div class="template">
+        <div class="header x-grid x-v-m"><ul><li>Template</li></ul></div>
+        <div class="vseditor" data-prop="vseditor"></div>
+      </div>
+      <div class="preview">        
+        <div class="header x-grid x-v-m"><ul><li>Preview</li></ul></div>
+        <iframe data-bind-load="function(o){ this.frame = o; }" src="preview.html" data-el="iframe" class="x-transition" style="border:0;width:100%;height:100%;"></iframe>
+    
+      </div>
+    </div>
+    
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="x.css"/>
+    <template default>
+      <main>
+        class{
+          construct(){           
+            window.onerror = (e,s)=>{ 
+              new error({error:e,stack:s}).appendTo("body", false);
+            };
+            
+            X.$.message["preview"] = (data) => { 
+              
+              X.template(data.template,"preview").ready((template) => {
+                
+                new template().appendTo("body",false);
+              });
+              
+            };
+
+            X.$.message["ping"] = function(d){ 
+              window.parent.postMessage({target:d.id}, "*");
+            };
+
+          }
+
+        }
+      </main>
+    </template>
+
+
+    <template namespace="error">
+      <div style="padding:10px;word-break: break-all;color:#7F0000;">
+        Error: {(this.$.options.error)}<br/><br/>Trace:<br/>
+        {if(/\n/.test(this.$.options.stack))}
+          this.$.options.stack.split(/\n/).join('<br/>')
+        {/if}
+      </div>
+    </template>
+    <script src="x.js"></script>
+  </head>
+  <body>
+      
+
+  </body>
+</html>

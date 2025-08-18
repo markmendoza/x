@@ -1,0 +1,16 @@
+<template default>
+  <require>path/to/test.js</require>
+  <require>path/to/test.css</require>
+  <require namespace="test">path/to/test.tpl</require>
+  <main>
+    class{
+      construct(){
+        this.ready(function(){
+          /* assets have loaded */
+          new test().appendTo('body');
+        });
+      }
+    }
+  </main>
+</template>
+
