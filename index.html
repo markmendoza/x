@@ -87,7 +87,8 @@
           
           destruct(){
             
-            await this.await(function(){ return typeof monaco; });
+            await this.await(function(){ return typeof monaco != "undefined"; });
+            
             this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
                 matchBrackets : true,
                 automaticLayout : true,
