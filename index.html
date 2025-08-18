@@ -24,10 +24,21 @@
             window.App = this;
             
             await this.await(function(){ return typeof monaco; });
-            
-            X.$.message[this.$.iid] = ()=>{
-              this.done = true; 
-            };
+            this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
+                matchBrackets : true,
+                automaticLayout : true,
+                lineHeight : "18px",
+                tabSize : 2
+              }
+            );
+
+            var timer1;
+            this.editor.onDidChangeModelContent(()=>{
+              clearTimeout(timer1);
+              timer1 = setTimeout(()=>{ 
+                this.preview();
+              },1000);
+            });
 
           }
 
@@ -39,10 +50,11 @@
           }
 
           preview(){
-            if(!this.done){
+            if(!this.frame){
+              if(this.$.el.iframe)
+                this.frame = this.$.el.iframe;
               var timer = setInterval(()=>{ 
-                if(this.frame)this.frame.contentWindow.postMessage({target : 'ping', id : this.$.iid }, '*');
-                if(this.done){
+                if(this.frame){
                   clearInterval(timer); 
                   this.message();
                 }
@@ -54,6 +66,16 @@
 
               
           edit(n){
+
+            if(!this.editor){
+              var timer = setInterval(()=>{
+                if(this.editor){
+                  clearInterval(timer);
+                  this.edit(n);
+                }
+              },250);
+              return;
+            }
             if(this.cache[n]){
               this.setValue(this.cache[n]);
               return;
@@ -80,21 +102,7 @@
           }
           
           destruct(){
-            this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
-                matchBrackets : true,
-                automaticLayout : true,
-                lineHeight : "18px",
-                tabSize : 2
-              }
-            );
-
-            var timer1;
-            this.editor.onDidChangeModelContent(()=>{
-              clearTimeout(timer1);
-              timer1 = setTimeout(()=>{ 
-                this.preview();
-              },1000);
-            });
+            
 
           }
         }
