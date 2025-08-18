@@ -23,22 +23,6 @@
             this.cache = {};
             window.App = this;
             
-            await this.await(function(){ return typeof monaco; });
-            this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
-                matchBrackets : true,
-                automaticLayout : true,
-                lineHeight : "18px",
-                tabSize : 2
-              }
-            );
-
-            var timer1;
-            this.editor.onDidChangeModelContent(()=>{
-              clearTimeout(timer1);
-              timer1 = setTimeout(()=>{ 
-                this.preview();
-              },1000);
-            });
 
           }
 
@@ -103,6 +87,22 @@
           
           destruct(){
             
+            await this.await(function(){ return typeof monaco; });
+            this.editor = monaco.editor.create(document.querySelector(this.$.prop.vseditor),{
+                matchBrackets : true,
+                automaticLayout : true,
+                lineHeight : "18px",
+                tabSize : 2
+              }
+            );
+
+            var timer1;
+            this.editor.onDidChangeModelContent(()=>{
+              clearTimeout(timer1);
+              timer1 = setTimeout(()=>{ 
+                this.preview();
+              },1000);
+            });
 
           }
         }
