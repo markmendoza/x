@@ -11,9 +11,8 @@
             };
             
             X.$.message["preview"] = (data) => { 
-              
+              document.body.innerHTML = 'Fetching...';
               X.template(data.template,"preview").ready((template) => {
-                
                 new template().appendTo("body",false);
               });
               
