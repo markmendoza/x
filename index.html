@@ -126,12 +126,58 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
         <main>
           class{
             destruct(){
-              new installation().appendTo(window.App.$.prop.content);
+              var i = new installation().appendTo(window.App.$.prop.content);
               new card({width:300,gutter:20}).appendTo(window.App.$.prop.content);
               new util().appendTo(window.App.$.prop.content);
+
+              new way1().appendTo(i.$.prop.way1);
+              new way2().appendTo(i.$.prop.way2);
+              new way3().appendTo(i.$.prop.way3);
             }
           }
         </main>
+      </template>
+      <template namespace="way1">
+<pre>
+  <code>
+    &lt;html>
+      &lt;body>
+        &lt;template default>
+          &lt;div>Hello world&lt;/div>
+        &lt;/template>
+      &lt;/body>
+    &lt;/html>
+  </code>
+</pre>
+      </template>
+      <template namespace="way2">
+<pre>
+  <code>
+    &lt;html>
+      &lt;body>
+        &lt;template default>
+          &lt;require namespace="test">/path/to/template.tpl&lt;/require>
+          &lt;main>
+            class{
+              construct(){
+                new test().appendTo(selector);
+              }
+            }
+          &lt;/main>
+        &lt;/template>
+      &lt;/body>
+    &lt;/html>
+  </code>
+</pre>
+      </template>
+      <template namespace="way3">
+        <pre>
+          <code>
+  X.template("path/to/template.tpl").ready(function(template){
+    new template(options).appendTo(selector);
+  });
+          </code>
+        </pre>
       </template>
       <template namespace="installation">
         <h5>Getting Started</h5>
@@ -141,7 +187,13 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
   <script src="https://markmendoza.github.io/x/x.js"></script>
           </code>
         </pre>
-
+        <h5>Ways to use templates</h5>
+        <div>1. as HTML template</div>
+        <div data-prop="way1"></div>
+        <div>2. Requiring the file</div>
+        <div data-prop="way2"></div>
+        <div>3. via function</div>
+        <div data-prop="way3"></div>
         <div>
           <h5>Try it now</h5>
         </div>
