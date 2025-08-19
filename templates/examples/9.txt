@@ -20,7 +20,7 @@
 </template>
 
 <template namespace="list">
-  <div>
+  <div style="padding:20px">
     {(this.$.options.name)}<br/> {(this.$.options.email)}
   </div>
 </template>
