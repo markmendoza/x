@@ -128,6 +128,7 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
             destruct(){
               new installation().appendTo(window.App.$.prop.content);
               new card({width:300,gutter:20}).appendTo(window.App.$.prop.content);
+              new util().appendTo(window.App.$.prop.content);
             }
           }
         </main>
@@ -227,6 +228,33 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
         </div>
       </template>
 
+      <template namespace="util">
+        <h5>Utilities</h5>
+        <pre>
+          <code>
+  //https://raw.githubusercontent.com/blueimp/JavaScript-MD5/master/js/md5.min.js 
+  md5(str);
+
+  //https://cdnjs.com/libraries/Base64
+  base64.encode(str);
+  base64.decode(encodedStr);
+
+  //Date Format 1.2.3
+  //(c) 2007-2009 Steven Levithan | stevenlevithan.com
+  new Date().format();
+
+  X.$.mediaQuery(start,end, function(inRange){   });
+  X.$.css(css,[start,end], namespace(optional));
+
+  X.$.query(selector).each(function(o){});
+  X.$.query.extend(name, function(){});
+
+  X.$.passcrypt.encrypt(str);
+  X.$.passcrypt.decrypt(encryptedString);
+          </code>
+        </pre>
+      </template>
+
     </div>
     <div class="editor">
       <div class="template">
@@ -235,8 +263,9 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
       </div>
       <div class="preview">        
         <div class="header x-grid x-v-m"><ul><li>Preview</li></ul></div>
-        <iframe data-bind-load="function(o){ this.frame = o; }" src="preview.html" data-el="iframe" class="x-transition" style="border:0;width:100%;height:100%;"></iframe>
-    
+        <div style="padding:20px">
+          <iframe data-bind-load="function(o){ this.frame = o; }" src="preview.html" data-el="iframe" class="x-transition" style="background:#fff;border:0;width:100%;height:100%;"></iframe>
+        </div>
       </div>
     </div>
     
