@@ -126,9 +126,9 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
         <main>
           class{
             destruct(){
-              var i = new installation().appendTo(window.App.$.prop.content);
-              new card({width:300,gutter:20}).appendTo(window.App.$.prop.content);
-              new util().appendTo(window.App.$.prop.content);
+              var i = new installation().appendTo(this.$.prop.content);
+              new card({width:300,gutter:20}).appendTo(this.$.prop.content);
+              new util().appendTo(this.$.prop.content);
 
               new way1().appendTo(i.$.prop.way1);
               new way2().appendTo(i.$.prop.way2);
