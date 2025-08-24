@@ -103,7 +103,7 @@ h5{
 }
 
 .editor{  
-  border-left:1px solid #4C4C60;
+  border-left:1px solid #efefef;
   position:fixed;top:0;right:0;width:40%;height:100vh;background:#fff;
 }
 
@@ -112,7 +112,7 @@ h5{
 }
 
 .editor .preview{
-  background:#4C4C60;
+  background:#efefef;
 }
 
 .editor .vseditor{
@@ -121,9 +121,8 @@ h5{
 
 .editor .header{
   height:50px;
-  background:#4C4C60;
+  background:#efefef;
   padding-left:20px;
-  color:#fff;
 }
 
 .x-card-list{

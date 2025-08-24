@@ -127,8 +127,8 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
           class{
             destruct(){
               var i = new installation().appendTo(this.$.prop.content);
-              new card({width:300,gutter:20}).appendTo(this.$.prop.content);
               new util().appendTo(this.$.prop.content);
+              new card({width:300,gutter:20}).appendTo(this.$.prop.content);
 
               new way1().appendTo(i.$.prop.way1);
               new way2().appendTo(i.$.prop.way2);
@@ -196,9 +196,6 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
         <div data-prop="way2"></div>
         <div>3. via function</div>
         <div data-prop="way3"></div>
-        <div>
-          <h5>Try it now</h5>
-        </div>
       </template>
 
             
@@ -249,6 +246,10 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
           .x-card-list{ padding:10px;text-decoration:underline;cursor:pointer; }
           .x-card-list:active{ color:#fff; }
         </style>
+        
+        <div>
+          <h5>Try it now</h5>
+        </div>
         <div class="x-p-20">
           <ul data-prop="card" class="x-card" style="container-type:inline-size">
             <li class="x-card-list {(this.cls)}" data-bind-tap="function(){ window.App.edit(1); }">Hello world</li>
