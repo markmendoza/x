@@ -160,7 +160,9 @@ Join our <a href="https://www.facebook.com/groups/x0x0x0/" class="x-link">Facebo
           &lt;main>
             class{
               construct(){
-                new test().appendTo(selector);
+                this.ready(function(){
+                  new test().appendTo(selector);
+                });
               }
             }
           &lt;/main>
