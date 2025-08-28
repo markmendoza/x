@@ -101,3 +101,9 @@ h5{
   font-family:monospace;
   padding:20px;
 }
+div.x-grid > ul > li.spacer{
+  width:25%;
+}
+.content{
+  padding:50px;
+}

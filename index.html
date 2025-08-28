@@ -7,7 +7,9 @@
     <script src="x.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/dark.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  
+    <script>
+      X.$.css('.spacer{width:10px !important;}.content{padding:20px}',[0,1000]);
+    </script>
   </head>
   <body>
     
@@ -22,9 +24,6 @@
             this.cache = {};
             window.App = this;
             
-            X.$.mediaQuery(0,1000,(isMobile)=>{
-              this.isMobile = isMobile;
-            });
 
           }
 
@@ -79,8 +78,8 @@
     </template>
     <div class="x-grid" style="background:#efefef">
       <ul>
-        <li data-if="!this.isMobile" style="width:25%"></li>
-        <li style="padding:50px">
+        <li class="spacer"></li>
+        <li class="content">
           <div style="background:#fff;padding:20px;border-radius:5px;border:1px solid #c0c0c0;">
             <img src="images/logo.png"/>
             <h2>X is a javascript template system for building JAM Stack applications.</h2>
@@ -88,7 +87,7 @@
             <div data-prop="content"></div>
           </div>
         </li>
-        <li data-if="!this.isMobile" style="width:25%"></li>
+        <li class="spacer"></li>
       </ul>
     </div>
 
