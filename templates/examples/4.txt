@@ -2,23 +2,18 @@
   <main>
     class{
       construct(){
-        X.$.mediaQuery(0,1000,(isMobile)=>{
-          this.isMobile = isMobile;
-          this.active = isMobile;
-        });
+        this.data = [{name:"Mark"},{name:"Mendoza"}];
       }
     }
   </main>
 
-  <style>
-    .active{
-      color:red;
-    }
-  </style>
-
-  <div data-if="this.isMobile">Show on mobile</div>
-  <div data-if="!this.isMobile|function(v){ return v && true; }">Show on desktop</div>
-
-  <div data-toggle="this.active|active">Red on mobile</div>
-  <div data-toggle="this.active|active|function(v){ return false; }">Black</div>
+  {if(this.data)}
+    {for(var i in this.data)}
+      <div>{(this.data[i].name)}</div>
+    {/for}
+  {else if(false)}
+    <div>Wont show</div>
+  {else}
+    <div>Useful when rendering static contents</div>
+  {/if}
 </template>

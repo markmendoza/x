@@ -13,7 +13,6 @@ body{
   width:100%;
   padding:0;
   margin:0;
-  color:#2C2C32;
 }
 
 
@@ -78,7 +77,6 @@ code{
   background:#efefef;
   display:block;
   overflow:auto;
-  margin-right:20px;
 }
 
 .logo{
@@ -97,35 +95,9 @@ h2{
 h5{
   font-size:1em;
 }
-.content{
+
+.source{
+  font-size:1em;
+  font-family:monospace;
   padding:20px;
-  padding-right:40%;
-}
-
-.editor{  
-  border-left:1px solid #efefef;
-  position:fixed;top:0;right:0;width:40%;height:100vh;background:#fff;
-}
-
-.editor .template,.editor .preview{
-  height:calc((100vh / 2));
-}
-
-.editor .preview{
-  background:#efefef;
-}
-
-.editor .vseditor{
-  height:calc(100% - 50px);
-}
-
-.editor .header{
-  height:50px;
-  background:#efefef;
-  padding-left:20px;
-}
-
-.x-card-list{
-  
-  color:#4C4C60;
 }

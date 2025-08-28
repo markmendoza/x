@@ -1,19 +1,16 @@
 <template default>
+  <require>path/to/test.js</require>
+  <require>path/to/test.css</require>
+  <require namespace="test">path/to/test.tpl</require>
   <main>
     class{
       construct(){
-        this.data = [{name:"Mark"},{name:"Mendoza"}];
+        this.ready(function(){
+          /* assets have loaded */
+          new test().appendTo('body');
+        });
       }
     }
   </main>
-
-  {if(this.data)}
-    {for(var i in this.data)}
-      <div>{(this.data[i].name)}</div>
-    {/for}
-  {else if(false)}
-    <div>Wont show</div>
-  {else}
-    <div>Useful when rendering static contents</div>
-  {/if}
 </template>
+

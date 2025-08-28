@@ -1,28 +1,26 @@
 <template default>
-  <require>path/to/test.js</require>
-  <require>path/to/test.css</require>
-  <require namespace="test">path/to/test.tpl</require>
   <main>
     class{
       construct(){
-        /* blocking, use when checking variables for example */
-        await this.await(function(){ return typeof window.X; });
-        this.ready(function(){
-          /* assets/templates have loaded */
+        this.data = await new Promise(function(resolve){
+          fetch("https://jsonplaceholder.typicode.com/users").then((res)=>{
+            return res.json();
+          }).then(function(d){
+            resolve(d);
+          });
         });
 
-        /* blocking */
-        await new Promise((resolve,reject)=>{
-          /* fetch some data */
-          resolve();
-          
-        });
-      }
-
-      destruct(){
-        /* elements are available in the DOM */
+        this.list.set(this.data);
+        
       }
     }
   </main>
+
+  <div data-for="this.list|list"></div>
 </template>
 
+<template namespace="list">
+  <div style="padding:20px">
+    {(this.$.options.name)}<br/> {(this.$.options.email)}
+  </div>
+</template>
